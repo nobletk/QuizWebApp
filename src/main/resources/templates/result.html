@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quiz App - Result</title>
+</head>
+<body>
+<h1>Quiz Result</h1>
+<p th:text="'Correct Answers: ' + ${quizResult.correctAnswers} + ' / ' + ${quizResult.totalQuestions}"></p>
+<p th:text="'Percentage: ' + ${quizResult.percentage} + '%'"></p>
+</body>
+</html>
