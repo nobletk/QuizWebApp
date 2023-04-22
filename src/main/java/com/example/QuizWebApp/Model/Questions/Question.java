@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,9 +27,15 @@ public class Question {
     @Transient
     private Integer userAnswerIndex;
 
-    public Question(String questionText, List<String> options, int correctAnswerIndex) {
-        this.questionText = questionText;
-        this.options = options;
-        this.correctAnswerIndex = correctAnswerIndex;
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", questionText='" + questionText + '\'' +
+                ", options=" + options +
+                ", correctAnswerIndex=" + correctAnswerIndex +
+                ", userAnswerIndex=" + userAnswerIndex +
+                '}';
     }
+
 }

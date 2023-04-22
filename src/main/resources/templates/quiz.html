@@ -9,8 +9,11 @@
 <form th:action="@{/submitQuiz}" th:object="${quizForm}" method="post">
     <div th:each="question, questionIndex : ${quizForm.questions}">
         <input type="hidden" th:name="|questions[${questionIndex.index}].id|" th:value="${question.id}">
+        <input type="hidden" th:name="|questions[${questionIndex.index}].questionText|" th:value="${question.questionText}">
+        <input type="hidden" th:name="|questions[${questionIndex.index}].correctAnswerIndex|" th:value="${question.correctAnswerIndex}">
         <p th:text="${question.questionText}"></p>
         <div th:each="option, optionIndex : ${question.options}">
+            <input type="hidden" th:name="|questions[${questionIndex.index}].options[${optionIndex.index}]|" th:value="${option}">
             <input type="radio" th:name="|questions[${questionIndex.index}].userAnswerIndex|" th:value="${optionIndex.index}" th:checked="${question.userAnswerIndex == optionIndex.index}">
             <label th:for="${'question' + questionIndex.index + 'option' + optionIndex.index}" th:text="${option}"></label>
         </div>

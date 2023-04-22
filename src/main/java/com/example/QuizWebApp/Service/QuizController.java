@@ -45,6 +45,7 @@ public class QuizController {
     @PostMapping("/submitQuiz")
     public String submitQuiz(@ModelAttribute QuizForm quizForm, Model model) {
         logger.info("Checking user answers");
+        logger.debug("QuizForm: {}", quizForm);
         QuizResult quizResult = quizService.checkAnswers(quizForm.getQuestions());
         logger.info("User got {} correct answers out of {}", quizResult.getCorrectAnswers(), quizResult.getTotalQuestions());
         model.addAttribute("quizResult", quizResult);
