@@ -4,14 +4,15 @@ import com.example.QuizWebApp.Model.Leaderboard.LeaderboardEntry;
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardRepository;
 import com.example.QuizWebApp.Model.Questions.Question;
 import com.example.QuizWebApp.Model.Questions.QuestionRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -44,14 +45,15 @@ public class QuizService {
         return new QuizResult(correctAnswers, questions.size());
     }
 
-    public void saveLeaderboardEntry(String playerName, int score) {
-        LeaderboardEntry entry = new LeaderboardEntry(playerName, score);
+    public void saveLeaderboardEntry(String playerName, BigDecimal percentage) {
+        LocalDateTime timestamp = LocalDateTime.now();
+        LeaderboardEntry entry = new LeaderboardEntry(playerName, percentage, timestamp);
         leaderboardRepository.save(entry);
     }
 
     public List<LeaderboardEntry> getTop10LeaderboardEntries() {
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "score"));
-        return leaderboardRepository.findTop10ByOrderByScoreDesc(pageRequest);
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "percentage").and(Sort.by(Sort.Direction.ASC, "timestamp")));
+        return leaderboardRepository.findTop10ByOrderByPercentageDescTimestampAsc(pageRequest);
     }
 
     public Question saveQuestion(Question question) {

@@ -11,8 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Controller
@@ -48,31 +49,20 @@ public class QuizController {
         logger.debug("QuizForm: {}", quizForm);
         QuizResult quizResult = quizService.checkAnswers(quizForm.getQuestions());
         logger.info("User got {} correct answers out of {}", quizResult.getCorrectAnswers(), quizResult.getTotalQuestions());
+
+        // Save the leaderboard entry
+        String playerName = "Player"; // Replace this with the user's name or username
+        BigDecimal percentage = BigDecimal.valueOf(quizResult.getPercentage()).setScale(2, RoundingMode.HALF_UP);
+        quizService.saveLeaderboardEntry(playerName, percentage);
+
         model.addAttribute("quizResult", quizResult);
         return "result";
     }
 
-
-//
-//    @PostMapping("/submitQuiz")
-//    public String submitQuiz(@RequestParam String playerName, @RequestParam List<Integer> playerAnswers, Model model) {
-//        // Retrieve questions and check answers
-//        List<Question> questions = // Fetch questions based on IDs from userAnswers
-//        int score = quizService.checkAnswers(questions, playerAnswers);
-//
-//        // Save leaderboard entry
-//        quizService.saveLeaderboardEntry(playerName, score);
-//
-//        // Add results to model
-//        model.addAttribute("score", score);
-//        model.addAttribute("userName", playerName);
-//        return "result";
-//    }
-//
-//    @GetMapping("/leaderboard")
-//    public String leaderboard(Model model) {
-//        List<LeaderboardEntry> entries = quizService.getTop10LeaderboardEntries();
-//        model.addAttribute("entries", entries);
-//        return "leaderboard";
-//    }
+    @GetMapping("/leaderboard")
+    public String leaderboard(Model model) {
+        List<LeaderboardEntry> leaderboardEntries = quizService.getTop10LeaderboardEntries();
+        model.addAttribute("leaderboardEntries", leaderboardEntries);
+        return "leaderboard";
+    }
 }

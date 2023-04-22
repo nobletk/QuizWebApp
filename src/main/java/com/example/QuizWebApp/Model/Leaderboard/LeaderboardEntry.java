@@ -1,12 +1,12 @@
 package com.example.QuizWebApp.Model.Leaderboard;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,10 +19,15 @@ public class LeaderboardEntry {
 
     private String playerName;
 
-    private int score;
+    @Column(precision = 5, scale = 2)  // Update the column to store percentage values
+    private BigDecimal percentage;
 
-    public LeaderboardEntry(String playerName, int score) {
+    private LocalDateTime timestamp;
+
+    public LeaderboardEntry(String playerName, BigDecimal percentage, LocalDateTime timestamp) {
         this.playerName = playerName;
-        this.score = score;
+        this.percentage = percentage;
+        this.timestamp = timestamp;
     }
 }
+

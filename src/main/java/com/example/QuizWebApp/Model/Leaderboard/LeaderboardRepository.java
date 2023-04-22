@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface LeaderboardRepository extends JpaRepository<LeaderboardEntry, Long> {
-    List<LeaderboardEntry> findTop10ByOrderByScoreDesc(Pageable pageable);
+    List<LeaderboardEntry> findTop10ByOrderByPercentageDescTimestampAsc(Pageable pageable);
 }
+
