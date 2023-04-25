@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Model.Security;
+package com.example.QuizWebApp.Model.Configuration;
 
 import com.example.QuizWebApp.Model.Login.UserRepository;
 import com.example.QuizWebApp.Model.Login.UserService;
@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class AppConfig {
+public class AppConfiguration {
 
     @Bean
     public UserService userService(UserRepository userRepository, PasswordEncoder passwordEncoder) {

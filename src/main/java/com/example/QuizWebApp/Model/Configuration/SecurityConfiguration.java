@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Model.Security;
+package com.example.QuizWebApp.Model.Configuration;
 
 import com.example.QuizWebApp.Model.Login.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
