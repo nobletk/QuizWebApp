@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Service;
+package com.example.QuizWebApp.Quiz;
 
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardEntry;
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardRepository;
