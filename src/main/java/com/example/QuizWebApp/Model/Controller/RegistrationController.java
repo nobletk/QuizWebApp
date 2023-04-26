@@ -2,6 +2,7 @@ package com.example.QuizWebApp.Model.Controller;
 
 import com.example.QuizWebApp.Model.Login.User;
 import com.example.QuizWebApp.Model.Login.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@Slf4j
 public class RegistrationController {
 
     @Autowired
@@ -21,6 +23,7 @@ public class RegistrationController {
 
     @GetMapping("/signup")
     public String showRegistrationForm() {
+        log.info("Showing registration form");
         return "signup";
     }
 
@@ -28,11 +31,14 @@ public class RegistrationController {
     public String registerUser(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         User existingUser = userService.findByUsername(username);
         if (existingUser != null) {
-            model.addAttribute("errorMessage", "Username is already taken. Please choose another one.");
+            String errorMessage = "Username is already taken!";
+            model.addAttribute("errorMessage", "Username is already taken!");
+            log.warn(errorMessage);
             return "signup";
         }
 
         userService.registerUser(username, password);
-        return "redirect:/login"; //TODO redirect to home page
+        log.info("User registered: {}", username);
+        return "redirect:/home";
     }
 }
