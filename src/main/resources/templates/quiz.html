@@ -9,51 +9,101 @@
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1520004434532-668416a08753');
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
             color: #ffffff;
+            padding-top: 80px;
         }
         .navbar {
             background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 1rem;
+        }
+        .nav-item {
+            margin-left: right;
         }
         .container {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 2rem;
             border-radius: 10px;
+            margin-top: 4rem;
         }
         .btn {
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
         }
+        .btn-primary {
+            background-color: green;
+        }
         .question {
             margin-bottom: 1rem;
         }
-
+        #timer-progress {
+            height: 8px;
+            transition: width 1s linear, background-color 1s linear;
+        }
+        #timer-progress {
+            height: 4px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .logout-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            position: relative;
+        }
+        .logout-text {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #000;
+            padding: 2px 5px;
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .logout-button:hover .logout-text {
+            display: block;
+        }
+        .form-check:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+        .form-check:hover .form-check-label {
+            cursor: pointer;
+        }
+        .form-check-input:checked + .form-check-label {
+            color: #28a745;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand text-white" th:href="@{/}">Quiz Me!</a>
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-            data-target="#navbarNav" data-toggle="collapse" type="button">
-        <i class="bi bi-list text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
-    </div>
+    <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
+        <button class="logout-button my-2 my-sm-0" type="submit">
+            <i class="bi bi-box-arrow-right text-white"></i>
+            <span class="logout-text">Logout</span>
+        </button>
+    </form>
+    <div class="bg-success" id="timer-progress"></div>
 </nav>
 
 <div class="container">
     <h1 class="text-center mb-4">Quiz</h1>
-    <form method="post" th:action="@{/submitQuiz}" th:object="${quizForm}">
+    <form id="quiz-form" method="post" th:action="@{/submitQuiz}" th:object="${quizForm}">
         <div th:each="question, questionIndex : ${quizForm.questions}">
             <input th:name="|questions[${questionIndex.index}].id|" th:value="${question.id}" type="hidden">
             <input th:name="|questions[${questionIndex.index}].questionText|" th:value="${question.questionText}"
@@ -77,8 +127,35 @@
     </form>
 </div>
 
+<script>
+    let timeLeft = 150;
+    const timerProgress = document.getElementById('timer-progress');
+    const quizForm = document.getElementById('quiz-form');
+
+    function updateTimer() {
+        const widthPercentage = (timeLeft / 150) * 100;
+        timerProgress.style.width = widthPercentage + '%';
+
+        if (widthPercentage <= 50 && widthPercentage > 20) {
+            timerProgress.classList.remove('bg-success');
+            timerProgress.classList.add('bg-warning');
+        } else if (widthPercentage <= 20) {
+            timerProgress.classList.remove('bg-warning');
+            timerProgress.classList.add('bg-danger');
+        }
+
+        if (timeLeft <= 0) {
+            quizForm.submit();
+            clearInterval(timerInterval);
+        } else {
+            timeLeft--;
+        }
+    }
+
+    const timerInterval = setInterval(updateTimer, 1000);
+
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
