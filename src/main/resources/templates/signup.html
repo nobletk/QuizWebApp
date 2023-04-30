@@ -8,41 +8,80 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://your-chosen-image-url.com');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center;
             color: #ffffff;
+            padding-top: 80px;
         }
         .navbar {
             background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 1rem;
         }
         .container {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 2rem;
             border-radius: 10px;
+            margin-top: 4rem;
         }
         .btn {
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
         }
-
-
+        .btn-primary {
+            background-color: green;
+        }
+       .back-btn {
+            font-size: 1.5rem;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            margin-right: 1rem;
+            color: white;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .back-btn:hover {
+            color: #ddd;
+        }
+        .back-btn-text {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #000;
+            padding: 2px 5px;
+            position: absolute;
+            top: 50px;
+            right: -10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .back-btn:hover .back-btn-text {
+            display: block;
+        }
+        .form-group {
+            padding-bottom: 0.5rem;
+        }
+        .form-check {
+            padding-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand text-white" th:href="@{/}">Quiz Me!</a>
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-            data-target="#navbarNav" data-toggle="collapse" type="button">
-        <i class="bi bi-list text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white" href="/">Back</a>
-            </li>
-        </ul>
+    <div class="d-flex align-items-center">
+        <button class="back-btn" onclick="window.location.href='/'">
+            <i class="bi bi-arrow-left-circle"></i>
+            <span class="back-btn-text">Back</span>
+        </button>
     </div>
 </nav>
 
@@ -57,14 +96,16 @@
             </div>
             <form method="post" th:action="@{/signup}">
                 <div class="form-group">
-                    <label for="username">Username</label>
                     <input class="form-control" id="username" name="username" placeholder="Username" required
                            type="text">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
                     <input class="form-control" id="password" name="password" placeholder="Password" required
                            type="password">
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="showPassword" onclick="togglePassword()" type="checkbox">
+                    <label class="form-check-label" for="showPassword">Show Password</label>
                 </div>
                 <button class="btn btn-primary" type="submit">Sign Up</button>
             </form>
@@ -73,6 +114,17 @@
 
 </div>
 
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("password");
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+        } else {
+            passwordField.type = "password";
+        }
+    }
+
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

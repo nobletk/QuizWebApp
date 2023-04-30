@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1520004434532-668416a08753');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -24,7 +24,12 @@
             border-radius: 10px;
             margin-top: 2rem;
         }
-
+        .btn-primary {
+            background-color: green;
+        }
+         .btn-secondary {
+            background-color: green;
+        }
     </style>
 </head>
 <body>
@@ -47,13 +52,23 @@
 </nav>
 
 <div class="container text-center">
-    <h1>Quiz Result</h1>
+    <h1>Your Results</h1>
     <p th:text="'Correct Answers: ' + ${quizResult.correctAnswers} + ' / ' + ${quizResult.totalQuestions}"></p>
     <p th:text="'Percentage: ' + ${quizResult.percentage} + '%'"></p>
-    <h2 th:if="${quizResult.percentage >= 80}">Congratulations! You scored highly!</h2>
-    <h2 th:if="${quizResult.percentage < 80}">Keep up the good work!</h2>
+    <h2 th:if="${quizResult.percentage == 100}">Congratulations!<br>You have won!</h2>
+    <h2 th:if="${80 <= quizResult.percentage and quizResult.percentage < 100}">Congratulations! <br>You scored highly!
+    </h2>
+    <h2 th:if="${50 <= quizResult.percentage and quizResult.percentage < 80}">Keep up the good work!<br>Try again!</h2>
+    <h2 th:if="${quizResult.percentage < 50}">Nice try!<br>You can do better!</h2>
+    <form action="/quiz" class="d-inline-block" method="post">
+        <input name="username" th:if="${#authentication}" th:value="${#authentication.principal.username}"
+               type="hidden">
+        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+        <button class="btn btn-secondary mt-3 mr-2" type="submit">Retry</button>
+    </form>
     <a class="btn btn-primary mt-3" th:href="@{/leaderboard}">View Leaderboard</a>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

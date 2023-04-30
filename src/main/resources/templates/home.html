@@ -8,20 +8,28 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1520004434532-668416a08753');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
             color: #ffffff;
+            padding-top: 80px;
         }
         .navbar {
             background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
         }
-        .jumbotron {
+        .container {
             background-color: rgba(0, 0, 0, 0.5);
-            padding-top: 4rem;
-            padding-bottom: 4rem;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 4rem;
         }
         .intro-text {
             margin-bottom: 1.5rem;
@@ -29,8 +37,12 @@
         .btn {
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
         }
-
-
+        .btn-primary {
+            background-color: green;
+        }
+         .btn-secondary {
+            background-color: green;
+        }
     </style>
 </head>
 <body>
@@ -58,9 +70,14 @@
     </div>
 </nav>
 
-<div class="jumbotron text-center">
+<div class="container text-center">
     <h1 class="display-4">Welcome to Quiz Me!</h1>
-    <p class="lead intro-text">Challenge yourself with our engaging quizzes and test your knowledge!</p>
+    <p class="lead intro-text">
+        Challenge yourself with our engaging quizzes and test your knowledge!
+        <br>10 questions in computer science.
+        <br> Finish before the timer runs out.
+        <br>Ready?!
+    </p>
     <hr class="my-4">
     <div sec:authorize="isAuthenticated()">
         <div class="row">

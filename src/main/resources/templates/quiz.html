@@ -8,8 +8,8 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1520004434532-668416a08753');
-            background-size: contain;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
+            background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -55,11 +55,17 @@
             left: 0;
         }
         .logout-button {
-            background: none;
+            font-size: 1.5rem;
+            background-color: transparent;
             border: none;
-            cursor: pointer;
             padding: 0;
+            margin-right: 1rem;
+            color: white;
+            transition: color 0.2s;
             position: relative;
+        }
+        .logout-button:hover {
+            color: #ddd;
         }
         .logout-text {
             display: none;
@@ -67,7 +73,7 @@
             color: #000;
             padding: 2px 5px;
             position: absolute;
-            top: -20px;
+            top: 50px;
             right: -10px;
             border-radius: 3px;
             font-size: 0.8rem;
