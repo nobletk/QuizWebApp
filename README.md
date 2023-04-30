@@ -1,6 +1,6 @@
 # Quiz Me!
 
-Quiz Me! is a simple, easy-to-use web application that allows users to test their knowledge on various topics through multiple-choice quizzes.
+"Quiz Me!" is a simple, easy-to-use web application that allows users to test their knowledge on various topics through multiple-choice quizzes.
 
 ## Features
 
@@ -35,27 +35,27 @@ Quiz Me! is a simple, easy-to-use web application that allows users to test thei
 
 1. Clone the repository:
 ```
-  git clone https://github.com/yourusername/quiz-web-app.git
+git clone https://github.com/yourusername/quiz-web-app.git
 ```
 
 2. Configure the database connection settings in the `application.properties` file located in `src/main/resources/`. Replace the placeholders with your database's credentials and settings:
 ```    
-    spring.datasource.url=jdbc:postgresql://localhost:5432/your_database_name
-    spring.datasource.username=your_username
-    spring.datasource.password=your_password
+spring.datasource.url=jdbc:postgresql://localhost:5432/your_database_name
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 ```
 
 3. Build the project:
 ```
-  mvn clean install
+mvn clean install
 ```  
 
 4. Run the application:
 ```
-  mvn spring-boot:run
+mvn spring-boot:run
 ```  
 
 5. Access the web app in your browser by navigating to:
 ```
-    http://localhost:8080
+http://localhost:8080
 ```  
