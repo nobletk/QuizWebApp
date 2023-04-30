@@ -22,6 +22,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
+/**
+ * The QuizController class is a Spring MVC controller that handles the quiz-related functionality of the application,
+ * including displaying and submitting quizzes, displaying the leaderboard, and logging in.
+ */
 @Controller
 @Slf4j
 public class QuizController {
@@ -36,11 +40,22 @@ public class QuizController {
         this.questionCount = questionCount;
     }
 
+    /**
+     * Handles the GET request to the home page.
+     *
+     * @return the home page view
+     */
     @GetMapping("/")
     public String home() {
         return "home";
     }
 
+    /**
+     * Handles the POST request to start the quiz.
+     *
+     * @param model the model object to add attributes to
+     * @return the quiz page view
+     */
     @PostMapping("/quiz")
     public String quiz(Model model) {
         log.info("Fetching {} random questions for the quiz", questionCount);
@@ -51,6 +66,13 @@ public class QuizController {
         return "quiz";
     }
 
+    /**
+     * Handles the POST request to submit the quiz.
+     *
+     * @param quizForm the quiz form containing the user's answers
+     * @param model    the model object to add attributes to
+     * @return the result page view
+     */
     @PostMapping("/submitQuiz")
     public String submitQuiz(@ModelAttribute QuizForm quizForm, Model model) {
         log.info("Checking user answers");
@@ -58,7 +80,6 @@ public class QuizController {
         QuizResult quizResult = quizService.checkAnswers(quizForm.getQuestions());
         log.info("User got {} correct answers out of {}", quizResult.getCorrectAnswers(), quizResult.getTotalQuestions());
 
-        // Save the leaderboard entry
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String playerName = auth.getName();
 
@@ -69,6 +90,12 @@ public class QuizController {
         return "result";
     }
 
+    /**
+     * Handles the GET request to display the leaderboard.
+     *
+     * @param model the model object to add attributes to
+     * @return the leaderboard page view
+     */
     @GetMapping("/leaderboard")
     public String leaderboard(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -80,6 +107,11 @@ public class QuizController {
         return "leaderboard";
     }
 
+    /**
+     * Returns the login page for the application.
+     *
+     * @return The name of the login page template.
+     */
     @GetMapping("/login")
     public String login() {
         log.info("User requested login page");

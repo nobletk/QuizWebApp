@@ -9,6 +9,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a quiz form containing a list of questions.
+ */
 @Getter
 @Setter
 public class QuizForm {

@@ -11,6 +11,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Service class for leaderboard functionality.
+ */
 @Service
 @Slf4j
 public class LeaderboardService {
@@ -18,6 +21,12 @@ public class LeaderboardService {
     @Autowired
     private LeaderboardRepository leaderboardRepository;
 
+    /**
+     * Saves a new leaderboard entry or updates an existing one with a higher score.
+     *
+     * @param playerName the name of the player
+     * @param percentage the percentage of the score
+     */
     public void saveLeaderboardEntry(String playerName, BigDecimal percentage) {
         LocalDateTime timestamp = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -41,6 +50,11 @@ public class LeaderboardService {
         }
     }
 
+    /**
+     * Gets the top 10 leaderboard entries ordered by percentage in descending order and timestamp in ascending order.
+     *
+     * @return a page of leaderboard entries
+     */
     public Page<LeaderboardEntry> getTop10LeaderboardEntries() {
         PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "percentage").and(Sort.by(Sort.Direction.ASC, "timestamp")));
         Page<LeaderboardEntry> top10Entries = leaderboardRepository.findTop10ByOrderByPercentageDescTimestampAsc(pageRequest);

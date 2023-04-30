@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Class representing a question entity in the quiz.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

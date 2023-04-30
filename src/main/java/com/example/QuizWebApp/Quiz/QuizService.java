@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class responsible for handling quiz-related operations.
+ */
 @Service
 @Slf4j
 public class QuizService {
@@ -15,6 +18,12 @@ public class QuizService {
     @Autowired
     private QuestionRepository questionRepository;
 
+    /**
+     * Fetches a specified number of random questions from the database.
+     *
+     * @param count the number of random questions to fetch
+     * @return a list of randomly-selected questions
+     */
     public List<Question> getRandomQuestions(int count) {
         log.info("Fetching {} random questions from the database", count);
         List<Question> randomQuestions = questionRepository.findRandomQuestions(count);
@@ -22,6 +31,12 @@ public class QuizService {
         return randomQuestions;
     }
 
+    /**
+     * Checks the answers to a list of questions and calculates the quiz result.
+     *
+     * @param questions the list of questions with user answers
+     * @return a QuizResult object containing the number of correct answers and total questions
+     */
     public QuizResult checkAnswers(List<Question> questions) {
         int correctAnswers = 0;
         for (Question question : questions) {
@@ -36,10 +51,4 @@ public class QuizService {
 
         return new QuizResult(correctAnswers, questions.size());
     }
-
-    public Question saveQuestion(Question question) {
-        return questionRepository.save(question);
-    }
 }
-
-

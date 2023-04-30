@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * This class represents an entry in the leaderboard, which stores the player name, their percentage score, and the timestamp of the score update.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,11 +21,18 @@ public class LeaderboardEntry {
 
     private String playerName;
 
-    @Column(precision = 5, scale = 2)  // Update the column to store percentage values
+    @Column(precision = 5, scale = 2)
     private BigDecimal percentage;
 
     private String timestamp;
 
+    /**
+     * Constructs a leaderboard entry with the specified player name, percentage score, and timestamp.
+     *
+     * @param playerName the name of the player
+     * @param percentage the percentage score of the player
+     * @param timestamp  the timestamp of the score update
+     */
     public LeaderboardEntry(String playerName, BigDecimal percentage, String timestamp) {
         this.playerName = playerName;
         this.percentage = percentage;
