@@ -18,6 +18,20 @@
         .navbar {
             background-color: rgba(0, 0, 0, 0.7);
         }
+         .home-text {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #000;
+            padding: 2px 5px;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .navbar-brand:hover .home-text {
+            display: block;
+        }
         .container {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 2rem;
@@ -35,7 +49,10 @@
 <body>
 
 <nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand text-white" th:href="@{/}">Quiz Me!</a>
+    <a class="navbar-brand text-white position-relative" th:href="@{/}">
+        Quiz Me!
+        <span class="home-text">Home</span>
+    </a>
     <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
             data-target="#navbarNav" data-toggle="collapse" type="button">
         <i class="bi bi-list text-white"></i>
