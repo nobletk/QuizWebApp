@@ -1,7 +1,6 @@
 package com.example.QuizWebApp.Model.Leaderboard;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,8 +17,11 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class LeaderboardService {
 
-    @Autowired
-    private LeaderboardRepository leaderboardRepository;
+    private final LeaderboardRepository leaderboardRepository;
+
+    public LeaderboardService(LeaderboardRepository leaderboardRepository) {
+        this.leaderboardRepository = leaderboardRepository;
+    }
 
     /**
      * Saves a new leaderboard entry or updates an existing one with a higher score.

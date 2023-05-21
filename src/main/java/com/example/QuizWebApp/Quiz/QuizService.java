@@ -3,7 +3,6 @@ package com.example.QuizWebApp.Quiz;
 import com.example.QuizWebApp.Model.Questions.Question;
 import com.example.QuizWebApp.Model.Questions.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +14,11 @@ import java.util.List;
 @Slf4j
 public class QuizService {
 
-    @Autowired
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
+
+    public QuizService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
 
     /**
      * Fetches a specified number of random questions from the database.
