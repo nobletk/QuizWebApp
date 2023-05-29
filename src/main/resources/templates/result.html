@@ -1,93 +1,92 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Quiz App - Result</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            color: #ffffff;
-        }
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-         .home-text {
-            display: none;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #000;
-            padding: 2px 5px;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-        .navbar-brand:hover .home-text {
-            display: block;
-        }
-        .container {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-        .btn-primary {
-            background-color: green;
-        }
-         .btn-secondary {
-            background-color: green;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Quiz Page</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand text-white position-relative" th:href="@{/}">
-        Quiz Me!
-        <span class="home-text">Home</span>
-    </a>
-    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-            data-target="#navbarNav" data-toggle="collapse" type="button">
-        <i class="bi bi-list text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Logout</button>
-                </form>
-            </li>
-        </ul>
+<!--Navbar-->
+<nav class="navbar sticky-top navbar-expand-lg bd-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img alt="logo" src="/Images/quiz.png" width="60"/></a>
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler shadow-none border-white" data-bs-target="#navbarNav" data-bs-toggle="collapse"
+                type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav d-flex ms-md-auto">
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link active text-white" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" th:href="@{/leaderboard}">Leaderboard</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form class="form-inline my-2 my-lg-0" method="post" th:action="@{/logout}">
+                        <button class="btn logout-button my-2 my-sm-0 text-white" type="submit">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+<!--  Main container-->
+<div class="container py-5 h-100">
+    <h1 class="text-center p-5 mt-5 mb-5">Your Result</h1>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                    <!--Left side of card-->
+                    <div class="col-lg-6">
+                        <div class="card-body p-md-5 mx-md-4">
+                            <div class="text-center">
+                                <h2 class="mt-1 mb-5 pb-1">Your Quiz result</h2>
+                                <p th:text="'Correct Answers: ' + ${quizResult.correctAnswers} + ' / ' + ${quizResult.totalQuestions}"></p>
+                                <p th:text="'Percentage: ' + ${quizResult.percentage} + '%'"></p>
+                                <h2 th:if="${quizResult.percentage == 100}">Congratulations!<br>You have won!</h2>
+                                <h2 th:if="${80 <= quizResult.percentage and quizResult.percentage < 100}">
+                                    Congratulations! <br>You scored highly!
+                                </h2>
+                                <h2 th:if="${50 <= quizResult.percentage and quizResult.percentage < 80}">Keep up the
+                                    good work!<br>Try again!</h2>
+                                <h2 th:if="${quizResult.percentage < 50}">Nice try!<br>You can do better!</h2>
+                                <form action="/quiz" class="d-inline-block" method="post">
+                                    <input name="username" th:if="${#authentication}"
+                                           th:value="${#authentication.principal.username}"
+                                           type="hidden">
+                                    <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
+                                    <button class="btn text-white gradient-custom-1 mt-3 mb-3" type="submit">Retry
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right side of card -->
+                    <div class="col-lg-6 gradient-custom-1">
+                        <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+                            <img alt="celebration-img" class="img-fluid" src="/Images/celebration.jpg">
+                        </div>
 
-<div class="container text-center">
-    <h1>Your Results</h1>
-    <p th:text="'Correct Answers: ' + ${quizResult.correctAnswers} + ' / ' + ${quizResult.totalQuestions}"></p>
-    <p th:text="'Percentage: ' + ${quizResult.percentage} + '%'"></p>
-    <h2 th:if="${quizResult.percentage == 100}">Congratulations!<br>You have won!</h2>
-    <h2 th:if="${80 <= quizResult.percentage and quizResult.percentage < 100}">Congratulations! <br>You scored highly!
-    </h2>
-    <h2 th:if="${50 <= quizResult.percentage and quizResult.percentage < 80}">Keep up the good work!<br>Try again!</h2>
-    <h2 th:if="${quizResult.percentage < 50}">Nice try!<br>You can do better!</h2>
-    <form action="/quiz" class="d-inline-block" method="post">
-        <input name="username" th:if="${#authentication}" th:value="${#authentication.principal.username}"
-               type="hidden">
-        <input name="_csrf" th:value="${_csrf.token}" type="hidden"/>
-        <button class="btn btn-secondary mt-3 mr-2" type="submit">Retry</button>
-    </form>
-    <a class="btn btn-primary mt-3" th:href="@{/leaderboard}">View Leaderboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!--  End of .container-->
+<footer class="bg-dark mt-auto p-4 text-white text-center">
+    <p>&copy;2023 QuizMe!</p>
+</footer>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

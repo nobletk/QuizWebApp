@@ -1,0 +1,75 @@
+.navbar {
+    background: linear-gradient(to left, #890DB7, #9F0AC9, #B407DB, #CA03ED, #DF00FF);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.logout-button {
+    border-color: #fafafa;
+}
+
+.gradient-custom-1 {
+    background: linear-gradient(to left, #890DB7, #9F0AC9, #B407DB, #CA03ED, #DF00FF);
+}
+
+.btn {
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    box-shadow: 0 8px 9px -4px rgba(0, 0, 0, 0.15), 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.question-text {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.form-check:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.form-check:hover .form-check-label {
+    cursor: pointer;
+}
+
+.form-check-input {
+    display: none;
+}
+
+.form-check-label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 2px solid #9F0AC9;
+    vertical-align: middle;
+}
+
+.form-check-input:checked + .form-check-label::before {
+    background-color: #9F0AC9;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #9F0AC9;
+    font-weight: bold;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-radius: 0;
+}
+
+.current-user {
+    background-color: rgba(180, 7, 219, 0.2);
+}
+

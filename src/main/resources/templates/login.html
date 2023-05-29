@@ -1,157 +1,94 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Login page</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../Images/maxim-berg.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            color: #ffffff;
-            padding-top: 80px;
-        }
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.7);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            padding-right: 1rem;
-        }
-        .home-text {
-            display: none;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #000;
-            padding: 2px 5px;
-            position: absolute;
-            top: 50px;
-            left: 0;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-        .navbar-brand:hover .home-text {
-            display: block;
-        }
-        .container {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 2rem;
-            border-radius: 10px;
-            margin-top: 4rem;
-        }
-        .btn {
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
-        }
-        .btn-primary {
-            background-color: green;
-        }
-        .back-btn {
-            font-size: 1.5rem;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            margin-right: 1rem;
-            color: white;
-            transition: color 0.2s;
-            position: relative;
-        }
-        .back-btn:hover {
-            color: #ddd;
-        }
-        .back-btn-text {
-            display: none;
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #000;
-            padding: 2px 5px;
-            position: absolute;
-            top: 50px;
-            right: -10px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-        .back-btn:hover .back-btn-text {
-            display: block;
-        }
-        .form-group {
-            padding-bottom: 0.5rem;
-        }
-        .form-check {
-            padding-bottom: 1rem;
-        }
-           .toggle-password-btn {
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            background: transparent;
-            border: none;
-            transform: translateY(-50%);
-            color: black;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
 </head>
-<body>
-
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand text-white position-relative" th:href="@{/}">
-        Quiz Me!
-        <span class="home-text">Home</span>
-    </a>
-    <div class="d-flex align-items-center">
-        <button class="back-btn" onclick="window.location.href='/'">
-            <i class="bi bi-arrow-left-circle"></i>
-            <span class="back-btn-text">Back</span>
-        </button>
-    </div>
-</nav>
-
-<div class="container">
-    <h1 class="text-center mt-5">Login</h1>
-
-    <div class="row mt-5">
-        <div class="col-md-6 offset-md-3">
-            <p class="text-danger mt-2" th:if="${session.error}" th:text="${session.error}"></p>
-            <form method="post" th:action="@{/login}">
-                <div class="form-group">
-                    <input class="form-control" id="username" name="username" placeholder="Username" required
-                           type="text">
+<body class="d-flex flex-column min-vh-100">
+<!--Main container-->
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                    <!--Left side of card-->
+                    <div class="col-lg-6">
+                        <div class="card-body p-md-5 mx-md-4">
+                            <div class="text-center">
+                                <img alt="logo" src="/Images/quiz.png" width="80"/>
+                                <h2 class="mt-1 mb-5 pb-1">QuizMe!</h2>
+                            </div>
+                            <p class="text-danger mt-2" th:if="${session.error}" th:text="${session.error}"></p>
+                            <form method="post" th:action="@{/login}">
+                                <p>Please login to your account</p>
+                                <div class="form-outline mb-4">
+                                    <input class="form-control" id="username" name="username" placeholder="Username"
+                                           required
+                                           type="text">
+                                </div>
+                                <div class="form-outline mb-4 position-relative">
+                                    <input class="form-control" id="password" name="password" placeholder="Password"
+                                           required
+                                           type="password"/>
+                                    <button class="toggle-password-btn border-0 bg-transparent position-absolute top-50 end-0 translate-middle-y"
+                                            onclick="togglePassword()" style="right: 10px;" type="button">
+                                        <i class="bi bi-eye" id="toggle-password-icon"></i>
+                                    </button>
+                                </div>
+                                <div class="d-grid text-center pt-1 mb-5 pb-1">
+                                    <button class="btn text-white gradient-custom-1" type="submit">LOG IN</button>
+                                </div>
+                                <div class="d-flex flex-row align-items-center justify-content-center pb-4">
+                                    <p class="small fw-bold mt-5 mb-0 me-2">Don't have an account?
+                                        <a class="link-danger text-decoration-none" th:href="@{/signup}">Create new</a>
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Right side of card -->
+                    <div class="col-lg-6 d-flex align-items-center gradient-custom-1">
+                        <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                            <h4 class="mb-4">Our Quiz Web App is unique</h4>
+                            <p class="small mb-0">It is a dynamic and interactive platform designed to provide a fun and
+                                engaging way to test your knowledge across
+                                a broad range of topics. Whether you are a trivia enthusiast, a student looking for an
+                                interesting way to study,
+                                or simply someone looking for a casual brain-teaser, our Quiz Web App has got you
+                                covered.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group position-relative">
-                    <input class="form-control" id="password" name="password" placeholder="Password" required
-                           type="password">
-                    <button class="toggle-password-btn" onclick="togglePassword()" type="button">
-                        <i class="bi bi-eye" id="toggle-password-icon"></i>
-                    </button>
-                </div>
-                <button class="btn btn-primary" type="submit">Login</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+<!--End of .container-->
+<footer class="bg-dark mt-auto p-4 text-white text-center">
+    <p>&copy;2023 QuizMe!</p>
+</footer>
 
 <script>
-        function togglePassword() {
-            var passwordField = document.getElementById("password");
-            var togglePasswordIcon = document.getElementById("toggle-password-icon");
+    function togglePassword() {
+        const passwordField = document.getElementById("password");
+        const togglePasswordIcon = document.getElementById("toggle-password-icon");
 
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                togglePasswordIcon.className = "bi bi-eye-slash";
-            } else {
-                passwordField.type = "password";
-                togglePasswordIcon.className = "bi bi-eye";
-            }
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            togglePasswordIcon.className = "bi bi-eye-slash";
+        } else {
+            passwordField.type = "password";
+            togglePasswordIcon.className = "bi bi-eye";
         }
+    }
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
