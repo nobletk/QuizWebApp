@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Model.Login;
+package com.example.QuizWebApp.Model.UserAuthentication;
 
 import jakarta.persistence.*;
 import lombok.Getter;

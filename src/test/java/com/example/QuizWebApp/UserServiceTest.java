@@ -1,8 +1,8 @@
 package com.example.QuizWebApp;
 
-import com.example.QuizWebApp.Model.Login.User;
-import com.example.QuizWebApp.Model.Login.UserRepository;
-import com.example.QuizWebApp.Model.Login.UserService;
+import com.example.QuizWebApp.Model.UserAuthentication.User;
+import com.example.QuizWebApp.Model.UserAuthentication.UserRepository;
+import com.example.QuizWebApp.Model.UserAuthentication.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

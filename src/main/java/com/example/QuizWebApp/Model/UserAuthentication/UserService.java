@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Model.Login;
+package com.example.QuizWebApp.Model.UserAuthentication;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User.UserBuilder;

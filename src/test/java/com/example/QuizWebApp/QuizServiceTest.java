@@ -2,8 +2,8 @@ package com.example.QuizWebApp;
 
 import com.example.QuizWebApp.Model.Questions.Question;
 import com.example.QuizWebApp.Model.Questions.QuestionRepository;
-import com.example.QuizWebApp.Quiz.QuizResult;
-import com.example.QuizWebApp.Quiz.QuizService;
+import com.example.QuizWebApp.Model.Quiz.QuizResult;
+import com.example.QuizWebApp.Model.Quiz.QuizService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

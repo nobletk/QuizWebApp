@@ -1,11 +1,8 @@
-package com.example.QuizWebApp.Model.Controller;
+package com.example.QuizWebApp.Model.Quiz;
 
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardEntry;
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardService;
 import com.example.QuizWebApp.Model.Questions.Question;
-import com.example.QuizWebApp.Quiz.QuizForm;
-import com.example.QuizWebApp.Quiz.QuizResult;
-import com.example.QuizWebApp.Quiz.QuizService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,16 +102,5 @@ public class QuizController {
         model.addAttribute("leaderboardEntries", leaderboardEntries);
         model.addAttribute("currentUsername", playerName);
         return "leaderboard";
-    }
-
-    /**
-     * Returns the login page for the application.
-     *
-     * @return The name of the login page template.
-     */
-    @GetMapping("/login")
-    public String login() {
-        log.info("User requested login page");
-        return "login";
     }
 }

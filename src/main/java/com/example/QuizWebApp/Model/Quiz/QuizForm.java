@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Quiz;
+package com.example.QuizWebApp.Model.Quiz;
 
 import com.example.QuizWebApp.Model.Questions.Question;
 import jakarta.persistence.FetchType;

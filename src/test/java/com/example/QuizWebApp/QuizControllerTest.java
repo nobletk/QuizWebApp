@@ -1,12 +1,12 @@
 package com.example.QuizWebApp;
 
-import com.example.QuizWebApp.Model.Controller.QuizController;
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardEntry;
 import com.example.QuizWebApp.Model.Leaderboard.LeaderboardService;
 import com.example.QuizWebApp.Model.Questions.Question;
-import com.example.QuizWebApp.Quiz.QuizForm;
-import com.example.QuizWebApp.Quiz.QuizResult;
-import com.example.QuizWebApp.Quiz.QuizService;
+import com.example.QuizWebApp.Model.Quiz.QuizController;
+import com.example.QuizWebApp.Model.Quiz.QuizForm;
+import com.example.QuizWebApp.Model.Quiz.QuizResult;
+import com.example.QuizWebApp.Model.Quiz.QuizService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

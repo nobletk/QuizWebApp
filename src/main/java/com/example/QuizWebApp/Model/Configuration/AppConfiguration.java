@@ -1,7 +1,7 @@
 package com.example.QuizWebApp.Model.Configuration;
 
-import com.example.QuizWebApp.Model.Login.UserRepository;
-import com.example.QuizWebApp.Model.Login.UserService;
+import com.example.QuizWebApp.Model.UserAuthentication.UserRepository;
+import com.example.QuizWebApp.Model.UserAuthentication.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

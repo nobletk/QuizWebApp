@@ -1,7 +1,7 @@
 package com.example.QuizWebApp;
 
-import com.example.QuizWebApp.Model.Login.User;
-import com.example.QuizWebApp.Model.Login.UserService;
+import com.example.QuizWebApp.Model.UserAuthentication.User;
+import com.example.QuizWebApp.Model.UserAuthentication.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@Import(RegistrationControllerTest.TestConfig.class)
-public class RegistrationControllerTest {
+@Import(AuthenticationControllerTest.TestConfig.class)
+public class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

@@ -1,7 +1,5 @@
-package com.example.QuizWebApp.Model.Controller;
+package com.example.QuizWebApp.Model.UserAuthentication;
 
-import com.example.QuizWebApp.Model.Login.User;
-import com.example.QuizWebApp.Model.Login.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,17 +10,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Controller for handling user registration requests
+ * Controller for handling user authentication requests
  */
 @Controller
 @Slf4j
-public class RegistrationController {
+public class AuthenticationController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegistrationController(UserService userService, PasswordEncoder passwordEncoder) {
+    public AuthenticationController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -58,6 +56,17 @@ public class RegistrationController {
 
         userService.registerUser(username, password);
         log.info("User registered: {}", username);
-        return "redirect:/home";
+        return "redirect:/";
+    }
+
+    /**
+     * Returns the login page for the application.
+     *
+     * @return The name of the login page template.
+     */
+    @GetMapping("/login")
+    public String login() {
+        log.info("User requested login page");
+        return "login";
     }
 }

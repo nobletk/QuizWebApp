@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Quiz;
+package com.example.QuizWebApp.Model.Quiz;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

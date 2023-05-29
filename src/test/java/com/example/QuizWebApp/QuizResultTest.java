@@ -1,6 +1,6 @@
 package com.example.QuizWebApp;
 
-import com.example.QuizWebApp.Quiz.QuizResult;
+import com.example.QuizWebApp.Model.Quiz.QuizResult;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

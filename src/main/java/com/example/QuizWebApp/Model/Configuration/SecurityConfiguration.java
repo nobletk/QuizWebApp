@@ -1,6 +1,6 @@
 package com.example.QuizWebApp.Model.Configuration;
 
-import com.example.QuizWebApp.Model.Login.UserService;
+import com.example.QuizWebApp.Model.UserAuthentication.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,7 +53,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/signup", "/login", "/static/**", "/Images/**").permitAll()
+                        .requestMatchers("/", "/signup", "/login", "/static/**", "/Images/**", "/css/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")

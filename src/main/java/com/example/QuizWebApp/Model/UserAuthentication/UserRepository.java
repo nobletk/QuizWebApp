@@ -1,4 +1,4 @@
-package com.example.QuizWebApp.Model.Login;
+package com.example.QuizWebApp.Model.UserAuthentication;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
